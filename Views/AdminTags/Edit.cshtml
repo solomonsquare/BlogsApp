@@ -1,0 +1,51 @@
+﻿@model Bloggee.Models.ViewModels.EditTagRequest
+@{
+}
+
+<div class="bg-secondary bg-opacity-10 py-2">
+    <div class="container">
+        <h2>Edit Tags</h2>
+    </div>
+</div>
+<br />
+
+<div class="container">
+    @if (Model != null)
+    {
+        <form method="post">
+            <div class="mb-3">
+            <label class="form-label">Id</label>
+            <input type="text" class="form-control" name="id" id="id" readonly asp-for="Id" />
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Name</label>
+            <input type="text" class="form-control" name="name" id="name" asp-for="Name" />
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Display Name</label>
+            <input type="text" class="form-control" name="displayName" id="displayName" asp-for="DisplayName" />
+        </div>
+
+        <div class="mb-3">
+
+            <div class="d-flex">
+                <button type="submit" class="btn btn-dark">Update</button>
+
+                <button class="btn btn-danger ms-2" type="submit"
+                asp-area=""
+                asp-controller="AdminTags"
+                asp-action="Delete"
+                >Delete</button>
+
+            </div>
+        </div>
+
+        </form>
+    }
+    else
+    {
+        <p>Tag not found!</p>
+    }
+</div>

@@ -1,0 +1,57 @@
+﻿@model List<Bloggee.Models.Domain.BloggPost>
+@{
+}
+<div class="bg-secondary bg-opacity-10 py-2">
+    <div class="container">
+        <h2>All Blog Posts - Admin Functionality</h2>
+    </div>
+</div>
+
+<div class="container" py-5>
+    @if (Model != null && Model.Any())
+    {
+        <table class="table">
+            <thead class="table-light">
+                <tr>
+                    <th>Id</th>
+                    <th>Heading</th>
+                    <th>Page Title</th>
+                    <th>Content</th>
+                    <th>Tags</th>
+                    <th> </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var blog in Model)
+                {
+                    <tr>
+                        <td>@blog.Id</td>
+                        <td>@blog.Heading</td>
+                        <td>@blog.PageTitle</td>
+                        <td>@blog.Content</td>
+                        <td>
+                            <div class="d-flex">
+                                @foreach (var tag in blog.Tags)
+                                {
+                                    <span class="badge bg-secondary m-1">@tag.Name</span>
+                                }
+                            </div>
+                        </td>
+                        <td>
+                            <a asp-area="" asp-controller="AdminBlogPosts" asp-action="Edit" asp-route-id="@blog.Id">
+                                Edit
+                            </a>
+                        </td>
+                        
+                    </tr>
+
+                }
+
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <p>No Tags where found!</p>
+    }
+</div>
