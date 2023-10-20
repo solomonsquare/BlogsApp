@@ -22,10 +22,18 @@ namespace Bloggee.Repositories
             return blogPost;
         }
 
-        public Task<BloggPost> DeleteAsync(Guid id)
+        public async Task<BloggPost> DeleteAsync(Guid id)
         {
+            var existingBlogPost = await bloggeeDbContext.BlogPosts.FindAsync(id);
 
-            throw new NotImplementedException();
+            if (existingBlogPost != null)
+            {
+                bloggeeDbContext.BlogPosts.Remove(existingBlogPost);
+                await bloggeeDbContext.SaveChangesAsync();
+
+                return existingBlogPost;
+            }
+            return null;
         }
 
         public async Task<IEnumerable<BloggPost>> GetAllAsync()

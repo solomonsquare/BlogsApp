@@ -168,11 +168,20 @@ namespace Bloggee.Controllers
 
         }
 
+        [HttpPost]
         public async Task<IActionResult> Delete (EditBlogPostRequest editBlogPostRequest)
         {
 
+            var deleteBlogPost = await blogPostRepository.DeleteAsync(editBlogPostRequest.Id);
 
-            return View();
+            if (deleteBlogPost != null)
+            {
+                return RedirectToAction("List");
+                
+            }
+            
+
+            return RedirectToAction("Edit", new {id = editBlogPostRequest.Id});
         }
     }
 }
